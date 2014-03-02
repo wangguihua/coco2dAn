@@ -112,4 +112,8 @@
 	AppController *app = (AppController*) [[UIApplication sharedApplication] delegate];
 	[[app navController] dismissModalViewControllerAnimated:YES];
 }
+-(void)ccTouchesBegan:(NSSet *)touches withEvent:(UIEvent *)event
+{
+    
+}
 @end
