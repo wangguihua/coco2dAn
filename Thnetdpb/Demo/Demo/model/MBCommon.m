@@ -8,6 +8,14 @@
 
 #import "MBCommon.h"
 
-@implementation PsnCommonQueryOprLoginInfo
-MB_SET_PROPERTY(method,@"PsnCommonQueryOprLoginInfo");
+@implementation MBUserAllInfo
+MB_SET_PROPERTY(method,@"p_loadInfo.action");
+MB_SET_PROPERTY(account,@"account");
 @end
+
+@implementation MBUserLogInfo
+MB_SET_PROPERTY(method,@"p_login.action");
+MB_SET_PROPERTY(account,@"account");
+MB_SET_PROPERTY(password,@"password");
+@end
+

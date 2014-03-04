@@ -40,7 +40,7 @@
         [backgroundView addSubview:_activityIndicatorView];
         
         UILabel *tipLabel = [[UILabel alloc] initWithFrame:CGRectMake(80, 20, 200, 40)];
-        tipLabel.text = NSLocalizedStringFromTable(@"appRequestTip", @"tips", @"");
+        tipLabel.text = @"正在通讯中...";
         tipLabel.textColor = kNormalTextColor;
         tipLabel.font = kNormalTextFont;
         tipLabel.backgroundColor = [UIColor clearColor];

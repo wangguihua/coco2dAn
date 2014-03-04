@@ -14,14 +14,17 @@
 @interface MBUserInfo : NSObject
 
 @property (nonatomic, unsafe_unretained) NSInteger menuIndex;
+@property (nonatomic,strong) NSMutableDictionary *userAllInfoDictionary;
 
 + (id)shareUserInfo;
 - (void)setUserInfo:(NSMutableDictionary *)dict;
 - (void)getUserInfo;                    //发通信获取用户信息
 - (void)clearUserInfo;                  //清除用户信息
+- (void)setUserAllInfo:(NSMutableDictionary *)dict;
 
 - (BOOL)isLoginState;                   //是否为登录状态
 - (NSDictionary *)userInfo;             //登录用户信息用户信息
 - (NSString *)valueForUserInfoKey:(NSString *)key;
 - (void)setValue:(id)value forUserInfoKey:(NSString *)key;
+- (NSDictionary *)userInfoAll;
 @end

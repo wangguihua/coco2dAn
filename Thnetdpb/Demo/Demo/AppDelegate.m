@@ -8,6 +8,10 @@
 
 #import "AppDelegate.h"
 #import "UncaughtExceptionHandler.h"
+#import "MBConstant.h"
+#import "MBLogViewController.h"
+#import "MBMainViewController.h"
+#import "UIImage+FGTAdditions.h"
 @implementation AppDelegate
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
@@ -20,7 +24,65 @@
     InstallUncaughtExceptionHandler();
 #endif
     [self.window makeKeyAndVisible];
+    [self appGlobleSetting];
+    
+    MBLogViewController *loginView =[[MBLogViewController alloc]initWithNibName:@"MBLogViewController" bundle:nil];
+    if (!_logNav) {
+        _logNav =[[UINavigationController alloc]initWithRootViewController:loginView];
+        
+    }
+    
+    
+    MBMainViewController *mainView =[[MBMainViewController alloc]initWithNibName:@"MBMainViewController" bundle:nil];
+    if (!_maiNav) {
+        _maiNav =[[UINavigationController alloc]initWithRootViewController:mainView];
+        
+    }
+    
+    BOOL isLogin = [[NSUserDefaults standardUserDefaults]boolForKey:UserISLogin];
+    if (!isLogin) {
+        
+       
+        self.window.rootViewController = _logNav;
+        
+    }else
+    {
+        
+        self.window.rootViewController = _maiNav;
+    }
+    
     return YES;
+}
+
+- (void)appGlobleSetting
+{
+    //设置应用程序全局外观
+    self.window.backgroundColor = [UIColor blackColor];
+    
+    if (IOS7_OR_LATER) {
+        [UIApplication sharedApplication].statusBarStyle = UIStatusBarStyleLightContent;
+        self.window.tintColor = HEX(@"#c20b0d");
+        [[UINavigationBar appearance] setBarTintColor:HEX(@"#c20b0d")];
+        [[UINavigationBar appearance] setTintColor:[UIColor whiteColor]];
+        [[UINavigationBar appearance] setTitleTextAttributes:@{ NSForegroundColorAttributeName: [UIColor whiteColor],
+                                                                NSFontAttributeName: kBigTitleFont}];
+    } else {
+        [UIApplication sharedApplication].statusBarStyle = UIStatusBarStyleBlackOpaque;
+        
+        [[UINavigationBar appearance] setBackgroundImage:[UIImage fgt_imageWithColor:HEX(@"#c20b0d") size:CGSizeMake(1, kkNavigationBarHeight)] forBarMetrics:UIBarMetricsDefault];
+        
+        
+        [[UINavigationBar appearance] setTitleTextAttributes:
+         @{
+           UITextAttributeTextColor: RGB(108, 113, 130),
+           UITextAttributeTextShadowOffset: [NSValue valueWithUIOffset:UIOffsetMake(0, 0)]
+           }];
+        
+        [[UIBarButtonItem appearance] setTitleTextAttributes: @{
+                                                                UITextAttributeTextShadowOffset: [NSValue valueWithUIOffset:UIOffsetMake(0, 0)],
+                                                                UITextAttributeTextColor:  RGB(255, 255, 255) } forState:UIControlStateNormal];
+    }
+    
 }
 
 - (void)applicationWillResignActive:(UIApplication *)application

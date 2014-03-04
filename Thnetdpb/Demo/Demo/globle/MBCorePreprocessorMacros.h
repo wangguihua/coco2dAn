@@ -11,8 +11,8 @@
 //--------------------------------------------------------------------------------------------------
 // Global compile
 #define __MB_UAT__                  (0)  //是否是UAT环境
-#define __MB_DEBUG__                (0)  //是否为debug模式
-#define __MB_LOG__                  (0)  //是否打开log
+#define __MB_DEBUG__                (1)  //是否为debug模式
+#define __MB_LOG__                  (1)  //是否打开log
 #define __MB_SAVE_LOG__             (0)  //是否将log保存到文件/Documents/log/
 #define __MB_ENABLE_THIRDPARTY__    (1)  //是否加载第三方程序
 #define __MB_PRODUCT__              (1)  //是否是生产环境，为1时需要将 __MB_DEBUG__ 置为0、__MB_ENABLE_THIRDPARTY__ 置为1

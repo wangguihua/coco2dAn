@@ -127,17 +127,9 @@ BOOL shouldCancelRequest(NSString *method) {
     NSString *postString = [NSString stringWithFormat:@"json=%@",[[postInfo JSONString] urlEncoded]];
     NSLog(@"post:%@",postString);
     
-    NSData *postData = [postString dataUsingEncoding:NSUTF8StringEncoding];
     
-    NSMutableURLRequest *urlRequest = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:kURL()]];
-    [urlRequest setTimeoutInterval:300.0];
-    [urlRequest setValue:@"application/x-www-form-urlencoded; charset=UTF-8" forHTTPHeaderField:@"Content-Type"];
-    [urlRequest setValue:@"json" forHTTPHeaderField:@"bfw-ctrl"];
-    [urlRequest setValue:@"zh-cn" forHTTPHeaderField:@"Accept-Language"];
-    [urlRequest setHTTPMethod:@"POST"];
-    [urlRequest setHTTPBody:postData];
     
-    NSLog(@"\n------【Request】------\n%@\n%@",[urlRequest allHTTPHeaderFields], [postInfo JSONString]);
+
     
     BOOL shouldShowLoadingView = [info[MBRequest_ShowLoadingView] isEqualToString:@"no"] ? NO : YES;
     BOOL shouldShowErrorAlert = [info[MBRequest_ShowErrorAlert] isEqualToString:@"no"] ? NO : YES;
@@ -154,6 +146,31 @@ BOOL shouldCancelRequest(NSString *method) {
         loadingView = [[MBLoadingView alloc] init];
         loadingView.canCancel = canCancelRequest;
     }
+    MBRequestItem *item = items[0];
+
+    NSString *urlStr= @"";
+    if ([item.method isEqualToString:@"p_login.action"]) {
+        
+        urlStr= [NSString stringWithFormat:@"%@%@%@?account=%@&password=%@",kURL(),@"permiss/",item.method,item.params[@"account"],item.params[@"password"]];
+        
+    }
+    if ([item.method isEqualToString:@"p_loadInfo.action"]) {
+        
+        urlStr= [NSString stringWithFormat:@"%@%@%@?account=%@",kURL(),@"permiss/",item.method,item.params[@"account"]];
+        
+    }
+    if ([item.method isEqualToString:@"i_loadInfo.action"]) {
+        
+        urlStr= [NSString stringWithFormat:@"%@info/%@?type=%@&user_id=%@",kURL(),item.method,item.params[@"type"],item.params[@"id"]];
+        
+    }
+
+    
+    NSMutableURLRequest *urlRequest = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:urlStr]];
+    [urlRequest setTimeoutInterval:300.0];
+    
+    NSLog(@"\n------【Request】------\n%@\n%@",[urlRequest allHTTPHeaderFields], [postInfo JSONString]);
+    
     __block NSInteger statusCode = -1;
     AFJSONRequestOperation *operation = [AFJSONRequestOperation JSONRequestOperationWithRequest:urlRequest success:^(NSURLRequest *request, NSHTTPURLResponse *response, id JSON) {
         [loadingView hide];
@@ -165,14 +182,7 @@ BOOL shouldCancelRequest(NSString *method) {
                 MBRequestItem *item = items[0];
                 if (!errorHandle(JSON, shouldShowErrorAlert, item.method)) {
                     //兼容老接口
-                    NSArray *responseArray;
-                    if (JSON[@"result"]) {
-                        responseArray = @[@{@"result": JSON[@"result"],
-                                            @"status": @"01"}];
-                    } else {
-                        responseArray = @[@{@"status": @"01"}];
-                    }
-                    success(responseArray);
+                    success(JSON);
                 }else{
                     failure(nil, JSON);
                 }

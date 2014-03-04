@@ -49,7 +49,7 @@
     _button.frame = CGRectMake(0, 0, self.frame.size.width, self.frame.size.height);
     [_button setBackgroundImage:[[UIImage imageNamed:@"select.png"] stretchableImageWithLeftCapWidth:30 topCapHeight:0] forState:UIControlStateNormal];
     [_button setTitleColor:kNormalTextColor forState:UIControlStateNormal];
-    [_button setTitleEdgeInsets:UIEdgeInsetsMake(0, 10, 0, 22)];
+    [_button setTitleEdgeInsets:UIEdgeInsetsMake(0, 6, 0, 22)];
     [_button.titleLabel setFont:kNormalTextFont];
     [_button setContentHorizontalAlignment:UIControlContentHorizontalAlignmentLeft];
     [_button addTarget:self action:@selector(selectButtonPressed) forControlEvents:UIControlEventTouchUpInside];

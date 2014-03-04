@@ -17,6 +17,7 @@
 
 @interface MBUserInfo ()
 @property (nonatomic,strong) NSMutableDictionary *userInfoDictionary;
+
 @end
 
 
@@ -43,20 +44,37 @@
 
 - (void)setUserInfo:(NSMutableDictionary *)dict
 {
-    if(self.userInfoDictionary == nil)
-    {
-        self.userInfoDictionary = dict;
+    if (dict) {
+        if(self.userInfoDictionary == nil)
+        {
+            self.userInfoDictionary = dict;
+        }
+        else
+        {
+            [self.userInfoDictionary addEntriesFromDictionary:dict];
+        }
     }
-    else
-    {
-        [self.userInfoDictionary addEntriesFromDictionary:dict];
-    }
+   
 }
 
+- (void)setUserAllInfo:(NSMutableDictionary *)dict
+{
+    if (dict) {
+        if(self.userAllInfoDictionary == nil)
+        {
+            self.userAllInfoDictionary = dict;
+        }
+        else
+        {
+            [self.userAllInfoDictionary addEntriesFromDictionary:dict];
+        }
+
+    }
+}
 - (void)getUserInfo
 {
     MBUserInfo *userInfo = self;
-    MBRequestItem *item = [MBRequestItem itemWithMethod:[PsnCommonQueryOprLoginInfo method] params:nil];
+    MBRequestItem *item = [MBRequestItem itemWithMethod:[MBUserAllInfo method] params:@{@"account": userInfo.userInfo[@"account"]}];
     [MBIIRequest requestWithItems:@[item] info:[NSDictionary dictionaryWithObject:@"no" forKey:MBRequest_CanCancelRequest]
                           success:^(id JSON) {
                               if (JSON[0] && [JSON[0][@"status"] isEqualToString:@"01"])
@@ -91,6 +109,10 @@
 - (NSDictionary *)userInfo
 {
     return _userInfoDictionary;
+}
+- (NSDictionary *)userInfoAll
+{
+    return _userAllInfoDictionary;
 }
 
 - (NSString *)valueForUserInfoKey:(NSString *)key{

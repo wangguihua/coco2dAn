@@ -129,6 +129,15 @@
 #define kLoginName              @"loginName"
 #define kLoginHint              @"loginHint"
 #define kZuoTiAccount           @"zuoTiAccount"
+#define kkNavigationBarHeight    44.0f
+
+
+#define UserISLogin @"UserISLogin"
+#define USerAllInfo @"USerAllInfo"
+#pragma mark - OS Version
+#undef  IOS7_OR_LATER
+#define IOS7_OR_LATER       ([[[UIDevice currentDevice] systemVersion] compare:@"7.0"] != NSOrderedAscending)
+#define RGB(__r, __g, __b) [UIColor colorWithRed:(__r / 255.0) green:(__g / 255.0) blue:(__b / 255.0) alpha:1]
 
 //--------------------------------------------------------------------------------------------------
 //交易数据字典

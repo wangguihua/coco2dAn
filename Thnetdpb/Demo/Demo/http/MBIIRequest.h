@@ -13,7 +13,7 @@
 
 
 
-#define kBIIBaseURL   @"https://ebsnew.boc.cn/BII/_bfwajax.do"//投产BII地址
+#define kBIIBaseURL   @"http://14.17.121.143:8080/manual/"//投产BII地址
 
 
 @interface MBRequestItem : NSObject
