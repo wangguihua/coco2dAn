@@ -5,7 +5,7 @@
 	<key>IDESourceControlProjectFavoriteDictionaryKey</key>
 	<false/>
 	<key>IDESourceControlProjectIdentifier</key>
-	<string>90EC2076-F13B-4800-8499-A22263E15ECF</string>
+	<string>A485224A-D760-4696-8E07-A7EE9093AF1D</string>
 	<key>IDESourceControlProjectName</key>
 	<string>Demo</string>
 	<key>IDESourceControlProjectOriginsDictionary</key>
@@ -14,11 +14,11 @@
 		<string>https://github.com/wangguihua/coco2dAn.git</string>
 	</dict>
 	<key>IDESourceControlProjectPath</key>
-	<string>Thnetdpb/Demo.xcodeproj/project.xcworkspace</string>
+	<string>Thnetdpb/Demo/Demo.xcodeproj/project.xcworkspace</string>
 	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
 	<dict>
 		<key>B5664BAA-8EC4-43EA-AD23-2B9004A0FE85</key>
-		<string>../../..</string>
+		<string>../../../..</string>
 	</dict>
 	<key>IDESourceControlProjectURL</key>
 	<string>https://github.com/wangguihua/coco2dAn.git</string>
