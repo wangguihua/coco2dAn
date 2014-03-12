@@ -159,12 +159,83 @@ BOOL shouldCancelRequest(NSString *method) {
         urlStr= [NSString stringWithFormat:@"%@%@%@?account=%@",kURL(),@"permiss/",item.method,item.params[@"account"]];
         
     }
-    if ([item.method isEqualToString:@"i_loadInfo.action"]) {
-        
-        urlStr= [NSString stringWithFormat:@"%@info/%@?type=%@&user_id=%@",kURL(),item.method,item.params[@"type"],item.params[@"id"]];
-        
+    
+    if ([item.params[@"keyWord"] isEqualToString:@"ALL"]) {
+        if ([item.method isEqualToString:@"i_loadInfo.action"]) {
+            
+            urlStr= [NSString stringWithFormat:@"%@info/%@?type=%@&user_id=%@",kURL(),item.method,item.params[@"type"],item.params[@"id"]];
+            
+        }
+    }
+    if ([item.params[@"keyWord"] isEqualToString:@"THREE"]) {
+        if ([item.method isEqualToString:@"i_loadInfo1.action"]) {
+            
+            
+            urlStr= [NSString stringWithFormat:@"%@info/%@?infoId=%@",kURL(),item.method,item.params[@"infoId"]];
+
+            
+            NSLog(@"2222========%@",urlStr);
+            
+        }
     }
 
+    if ([item.params[@"keyWord"] isEqualToString:@"FOUR"]) {
+        if ([item.method isEqualToString:@"i_loadInfo1.action"]) {
+            
+            
+            urlStr= [NSString stringWithFormat:@"%@info/%@?info1Id=%@&user_id=%@",kURL(),@"i_loadInfo2.action",item.params[@"infoId"],item.params[@"user_id"]];
+            
+            
+            NSLog(@"2222========%@",urlStr);
+            
+        }
+    }
+    if ([item.params[@"keyWord"] isEqualToString:@"FIVE"]) {
+        if ([item.method isEqualToString:@"i_loadInfo1.action"]) {
+            
+            
+            urlStr= [NSString stringWithFormat:@"%@info/%@?infoId=%@",kURL(),item.method,item.params[@"infoId"]];
+            
+            
+            NSLog(@"2222========%@",urlStr);
+            
+        }
+    }
+
+    if ([item.params[@"keyWord"] isEqualToString:@"SIX"]) {
+        if ([item.method isEqualToString:@"i_loadInfo1.action"]) {
+            
+            
+            urlStr= [NSString stringWithFormat:@"%@info/%@?infoId=%@",kURL(),item.method,item.params[@"infoId"]];
+            
+            
+            NSLog(@"2222========%@",urlStr);
+            
+        }
+    }
+    
+    if ([item.params[@"keyWord"] isEqualToString:@"SEVE"]) {
+        if ([item.method isEqualToString:@"i_loadInfo1.action"]) {
+            
+            
+            urlStr= [NSString stringWithFormat:@"%@info/%@?infoId=%@",kURL(),item.method,item.params[@"infoId"]];
+            
+            
+            NSLog(@"2222========%@",urlStr);
+            
+        }
+    }
+    if ([item.params[@"keyWord"] isEqualToString:@"search"]) {
+        if ([item.method isEqualToString:@"q_query.action"]) {
+            
+            
+            urlStr= [NSString stringWithFormat:@"%@query/%@?condition=%@",kURL(),item.method,item.params[@"condition"]];
+            
+            
+            NSLog(@"2222========%@",urlStr);
+            
+        }
+    }
     
     NSMutableURLRequest *urlRequest = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:urlStr]];
     [urlRequest setTimeoutInterval:300.0];

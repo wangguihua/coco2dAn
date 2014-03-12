@@ -20,7 +20,7 @@
     if (self) {
         // Custom initialization
         if (kScreenHeight<500) {
-            _content.frame = CGRectMake(_content.frame.origin.x, _content.frame.origin.y, 320, _content.frame.size.height-100);
+            _content.frame = CGRectMake(_content.frame.origin.x, _content.frame.origin.y, 320, self.view.frame.size.height-50);
         }
     }
     return self;

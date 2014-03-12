@@ -15,6 +15,12 @@
 #import "MBCommon.h"
 #import "MBGlobalUICommon.h"
 #import "TwoViewController.h"
+#import "ThreeViewController.h"
+#import "FourViewController.h"
+#import "FiveViewController.h"
+#import "SixViewController.h"
+#import "SevenViewController.h"
+#import "SearchResutlViewController.h"
 @interface MBMainViewController ()
 
 @end
@@ -37,18 +43,6 @@
     self.title= @"菜单";
     
     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"注销" style:UIBarButtonItemStyleBordered target:self action:@selector(loginOut)];
-    
-    _nieBuSel =[[MBSelectView alloc]initWithFrame:CGRectMake(15, 150, 95, 25)];
-    _nieBuSel.options = @[@"内部结构"];
-    [self.view addSubview:_nieBuSel];
-    
-    _linDaSel =[[MBSelectView alloc]initWithFrame:CGRectMake(115, 150, 95, 25)];
-    _linDaSel.options = @[@"领导职务"];
-    [self.view addSubview:_linDaSel];
-    
-    _persoSel =[[MBSelectView alloc]initWithFrame:CGRectMake(218, 150, 95, 25)];
-    _persoSel.options = @[@"个人名称"];
-    [self.view addSubview:_persoSel];
     
     
 }
@@ -86,7 +80,7 @@
     
     __block MBMainViewController *blockSelf = self;
     
-    MBRequestItem *item = [MBRequestItem itemWithMethod:@"i_loadInfo.action" params:@{@"id": userAllInfo[@"id"],@"type":@"1"}];
+    MBRequestItem *item = [MBRequestItem itemWithMethod:@"i_loadInfo.action" params:@{@"id": userAllInfo[@"id"],@"type":@"1",@"keyWord":@"ALL"}];
     
     [MBIIRequest requestWithItems:[NSArray arrayWithObject:item] success:^(id JSON) {
         
@@ -122,7 +116,7 @@
     
     __block MBMainViewController *blockSelf = self;
     
-    MBRequestItem *item = [MBRequestItem itemWithMethod:@"i_loadInfo.action" params:@{@"id": userAllInfo[@"id"],@"type":@"2"}];
+    MBRequestItem *item = [MBRequestItem itemWithMethod:@"i_loadInfo.action" params:@{@"id": userAllInfo[@"id"],@"type":@"2",@"keyWord":@"ALL"}];
     
     [MBIIRequest requestWithItems:[NSArray arrayWithObject:item] success:^(id JSON) {
         
@@ -150,15 +144,213 @@
     
 }
 - (IBAction)thrBtnPressed:(id)sender{
+    
+    NSDictionary *userAllInfo = [[NSUserDefaults standardUserDefaults]valueForKey:USerAllInfo];
+    
+    
+    __block MBMainViewController *blockSelf = self;
+    
+    MBRequestItem *item = [MBRequestItem itemWithMethod:@"i_loadInfo.action" params:@{@"id": userAllInfo[@"id"],@"type":@"3",@"keyWord":@"ALL"}];
+    
+    [MBIIRequest requestWithItems:[NSArray arrayWithObject:item] success:^(id JSON) {
+        
+        NSLog(@"1111====%@",JSON);
+        [blockSelf thrGetSuccess:JSON];
+        
+    } failure:^(NSError *error, id JSON) {
+        
+        NSLog(@"1111====%@",JSON);
+        MBHUD(@"网络不稳定，请重新请求", 1);
+        
+    }];
+
+    
+}
+-(void)thrGetSuccess:(id)JSON
+{
+    NSArray *array = JSON[@"ret"];
+    ThreeViewController *oneVC =[[ThreeViewController alloc]initWithNibName:@"ThreeViewController" bundle:nil];
+    oneVC.itemArray = [array copy];
+    [self.navigationController pushViewController:oneVC animated:YES];
 }
 - (IBAction)fouBtnPressed:(id)sender{
+    
+    NSDictionary *userAllInfo = [[NSUserDefaults standardUserDefaults]valueForKey:USerAllInfo];
+    
+    
+    __block MBMainViewController *blockSelf = self;
+    
+    MBRequestItem *item = [MBRequestItem itemWithMethod:@"i_loadInfo.action" params:@{@"id": userAllInfo[@"id"],@"type":@"4",@"keyWord":@"ALL"}];
+    
+    [MBIIRequest requestWithItems:[NSArray arrayWithObject:item] success:^(id JSON) {
+        
+        NSLog(@"1111====%@",JSON);
+        
+        
+        
+        [blockSelf fourGetSuccess:JSON];
+        
+        
+    } failure:^(NSError *error, id JSON) {
+        
+        NSLog(@"1111====%@",JSON);
+        MBHUD(@"网络不稳定，请重新请求", 1);
+        
+    }];
+
 }
+
+-(void)fourGetSuccess:(id)JSON
+{
+    NSArray *array = JSON[@"ret"];
+    FourViewController *oneVC =[[FourViewController alloc]initWithNibName:@"FourViewController" bundle:nil];
+    oneVC.itemArray = [array copy];
+    [self.navigationController pushViewController:oneVC animated:YES];
+}
+
 - (IBAction)fivBtnPressed:(id)sender{
+    
+    NSDictionary *userAllInfo = [[NSUserDefaults standardUserDefaults]valueForKey:USerAllInfo];
+    
+    
+    __block MBMainViewController *blockSelf = self;
+    
+    MBRequestItem *item = [MBRequestItem itemWithMethod:@"i_loadInfo.action" params:@{@"id": userAllInfo[@"id"],@"type":@"5",@"keyWord":@"ALL"}];
+    
+    [MBIIRequest requestWithItems:[NSArray arrayWithObject:item] success:^(id JSON) {
+        
+        NSLog(@"1111====%@",JSON);
+        
+        
+        
+        [blockSelf fiveGetSuccess:JSON];
+        
+        
+    } failure:^(NSError *error, id JSON) {
+        
+        NSLog(@"1111====%@",JSON);
+        MBHUD(@"网络不稳定，请重新请求", 1);
+        
+    }];
+
+}
+
+-(void)fiveGetSuccess:(id)JSON
+{
+    NSArray *array = JSON[@"ret"];
+    FiveViewController *oneVC =[[FiveViewController alloc]initWithNibName:@"FiveViewController" bundle:nil];
+    oneVC.itemArray = [array copy];
+    [self.navigationController pushViewController:oneVC animated:YES];
 }
 - (IBAction)sixBtnPressed:(id)sender{
+    
+    NSDictionary *userAllInfo = [[NSUserDefaults standardUserDefaults]valueForKey:USerAllInfo];
+    
+    
+    __block MBMainViewController *blockSelf = self;
+    
+    MBRequestItem *item = [MBRequestItem itemWithMethod:@"i_loadInfo.action" params:@{@"id": userAllInfo[@"id"],@"type":@"6",@"keyWord":@"ALL"}];
+    
+    [MBIIRequest requestWithItems:[NSArray arrayWithObject:item] success:^(id JSON) {
+        
+        NSLog(@"1111====%@",JSON);
+        
+        
+        
+        [blockSelf sixGetSuccess:JSON];
+        
+        
+    } failure:^(NSError *error, id JSON) {
+        
+        NSLog(@"1111====%@",JSON);
+        MBHUD(@"网络不稳定，请重新请求", 1);
+        
+    }];
+
+}
+
+-(void)sixGetSuccess:(id)JSON
+{
+    NSArray *array = JSON[@"ret"];
+    SixViewController *oneVC =[[SixViewController alloc]initWithNibName:@"SixViewController" bundle:nil];
+    oneVC.itemArray = [array copy];
+    [self.navigationController pushViewController:oneVC animated:YES];
 }
 - (IBAction)sevBtnPressed:(id)sender{
+    
+    NSDictionary *userAllInfo = [[NSUserDefaults standardUserDefaults]valueForKey:USerAllInfo];
+    
+    
+    __block MBMainViewController *blockSelf = self;
+    
+    MBRequestItem *item = [MBRequestItem itemWithMethod:@"i_loadInfo.action" params:@{@"id": userAllInfo[@"id"],@"type":@"7",@"keyWord":@"ALL"}];
+    
+    [MBIIRequest requestWithItems:[NSArray arrayWithObject:item] success:^(id JSON) {
+        
+        NSLog(@"1111====%@",JSON);
+        
+        
+        
+        [blockSelf senGetSuccess:JSON];
+        
+        
+    } failure:^(NSError *error, id JSON) {
+        
+        NSLog(@"1111====%@",JSON);
+        MBHUD(@"网络不稳定，请重新请求", 1);
+        
+    }];
+
+    
+}
+
+-(void)senGetSuccess:(id)JSON
+{
+    NSArray *array = JSON[@"ret"];
+    SevenViewController *oneVC =[[SevenViewController alloc]initWithNibName:@"SevenViewController" bundle:nil];
+    oneVC.itemArray = [array copy];
+    [self.navigationController pushViewController:oneVC animated:YES];
 }
 - (IBAction)searchBtnPressed:(id)sender {
+    
+    
+    SearchResutlViewController *oneVC =[[SearchResutlViewController alloc]initWithNibName:@"SearchResutlViewController" bundle:nil];
+//    oneVC.resutlID = [JSON copy];
+    oneVC.title=@"搜索结果";
+    [self.navigationController pushViewController:oneVC animated:YES];
+    return;
+    
+    __block MBMainViewController *blockSelf = self;
+    
+    MBRequestItem *item = [MBRequestItem itemWithMethod:@"q_query.action" params:@{@"condition":_searchKey.text,@"keyWord":@"search"}];
+    
+    [MBIIRequest requestWithItems:[NSArray arrayWithObject:item] success:^(id JSON) {
+        
+        NSLog(@"1111====%@",JSON);
+        
+        
+        
+        [blockSelf searchGetSuccess:JSON];
+        
+        
+    } failure:^(NSError *error, id JSON) {
+        
+        NSLog(@"1111====%@",JSON);
+        MBHUD(@"网络不稳定，请重新请求", 1);
+        
+    }];
+
+}
+-(BOOL)textFieldShouldReturn:(UITextField *)textField
+{
+    [textField resignFirstResponder];
+    return YES;
+}
+-(void)searchGetSuccess:(id)JSON
+{
+    SearchResutlViewController *oneVC =[[SearchResutlViewController alloc]initWithNibName:@"SearchResutlViewController" bundle:nil];
+    oneVC.resutlID = [JSON copy];
+    oneVC.title=@"搜索结果";
+    [self.navigationController pushViewController:oneVC animated:YES];
 }
 @end

@@ -21,7 +21,7 @@
 #define kNavigationBarHeight 44.0f
 #define kNavigationBarLandscapeHeight 33.0f
 #define kTabBarHeight 49.0f
-#define kContentViewHeight (kScreenHeight - kStatusBarHeight - kNavigationBarHeight - kTabBarHeight)
+#define kContentViewHeight (kScreenHeight - kStatusBarHeight - kNavigationBarHeight-110)
 #define kPickerViewHeight 216.0f
 #define kToolBarHeight 44.0f
 #define kStepViewHeight 25.0f

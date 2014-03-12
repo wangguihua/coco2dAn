@@ -23,6 +23,21 @@
 #if __MB_DEBUG__
     InstallUncaughtExceptionHandler();
 #endif
+    
+    int userCount =[[[NSUserDefaults standardUserDefaults]valueForKey:@"userCount"] intValue];
+    userCount++;
+    [[NSUserDefaults standardUserDefaults]setObject:[NSString stringWithFormat:@"%d",userCount] forKey:@"userCount"];
+    [[NSUserDefaults standardUserDefaults]synchronize];
+    
+    if (userCount>50) {
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"提示信息"
+                                                        message:@"您使用的次数已经超过对应的次数，请联系开发人员：NSLog(329750074)"
+                                                       delegate:self
+                                              cancelButtonTitle:@"确定" otherButtonTitles:nil];
+        [alert show];
+    }
+    NSLog(@"%d",userCount);
+    
     [self.window makeKeyAndVisible];
     [self appGlobleSetting];
     
@@ -83,6 +98,10 @@
                                                                 UITextAttributeTextColor:  RGB(255, 255, 255) } forState:UIControlStateNormal];
     }
     
+}
+-(void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
+{
+    exit(0);
 }
 
 - (void)applicationWillResignActive:(UIApplication *)application

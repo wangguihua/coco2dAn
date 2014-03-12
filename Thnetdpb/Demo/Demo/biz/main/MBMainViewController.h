@@ -8,17 +8,13 @@
 
 #import <UIKit/UIKit.h>
 #import "MBSelectView.h"
-@interface MBMainViewController : UIViewController
-{
-    MBSelectView *_nieBuSel;
-    MBSelectView *_linDaSel;
-    MBSelectView *_persoSel;
+@interface MBMainViewController : UIViewController<UITextFieldDelegate>
 
-}
 @property (weak, nonatomic) IBOutlet UILabel *name;
 @property (weak, nonatomic) IBOutlet UILabel *wordWhere;
 @property (weak, nonatomic) IBOutlet UILabel *kezhang;
 @property (weak, nonatomic) IBOutlet UILabel *job;
+@property (weak, nonatomic) IBOutlet UITextField *searchKey;
 
 - (IBAction)oneBtnPressed:(id)sender;
 - (IBAction)twoBtnPressed:(id)sender;
